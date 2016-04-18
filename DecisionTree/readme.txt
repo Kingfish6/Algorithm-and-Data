@@ -24,7 +24,7 @@
 4.dataframe.drop方法删除一列需要添加参数axis=1
 5.line是一个字符串，删除左右空格并且用tab分隔：line.strip().split('\t')
 6.字典的get(xxx,0)方法对于字典的赋值很好用
-
+7.查找列表中某个值的位置：p=list.index(value)
 
 
 
