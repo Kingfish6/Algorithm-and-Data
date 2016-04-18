@@ -1,6 +1,19 @@
-lenseslabels=['age','prescript','astigmatic','tearrate']
+lenseslabels=['age','prescript','astigmatic','tearrate','result']
 
 presbyopic	hyper	yes	normal	no lenses
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

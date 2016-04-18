@@ -85,14 +85,27 @@ def Tree(dataframe):
         tree[optimizefeat]=treemid
         return tree
 
+#测试器
+def Test(tree,testdata,lenseslabels):
+    key=list(tree.keys())[0]
+    p=lenseslabels.index(key)
+    midtree=list(tree.values())[0][testdata[p]]
+    del testdata[p]
+    lenseslabels.remove(key)
+    if type(midtree)==set:
+        return list(midtree)[0]
+    else:
+        Test(midtree,testdata,lenseslabels)
 
 if __name__=='__main__':
     filename=r'F:\git2\Algorithm-and-Data\DecisionTree\lenses.txt'
     dataframe=Parser(filename)
     tree=Tree(dataframe)
-    
-
-
+#测试数据
+    testdata=['presbyopic','hyper','yes','reduced','no lenses']
+    lenseslabels=['age','prescript','astigmatic','tearrate']
+    testresult=Test(tree,testdata[0:4],lenseslabels)
+    print(testresult)
 
 
 
