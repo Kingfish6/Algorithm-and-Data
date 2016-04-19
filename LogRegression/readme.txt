@@ -18,6 +18,7 @@
 
 学到的python代码：
 1.list数组相乘用dot方法，矩阵按元素相乘向转化为array再乘，矩阵按矩阵规则相乘先转化为mat再乘
-
+2.random模块中的randint(a,b)方法生成a到b之间的随机整数，numpy中自带random模块
+所以最后的代码为random.randint(a,b)或者numpy.random.randint(a,b)
 
 
