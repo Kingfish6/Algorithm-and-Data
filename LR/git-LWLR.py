@@ -39,14 +39,16 @@ def Selector(data,m):
     traininglab=mat(traininglab)
     testinglist=mat(testinglist)
     testinglab=mat(testinglab)
-    traininglist=(traininglist-mean(traininglist,0))/var(traininglist,0)
-    testinglist=(testinglist-mean(testinglist,0))/var(testinglist,0)
+    trainmean=mean(traininglist,0)
+    trainvar=sqrt(var(traininglist,0))
+    testinglist=(testinglist-trainmean)/trainvar
+    traininglist=(traininglist-trainmean)/trainvar
     return traininglist,traininglab,testinglist,testinglab
 
 #核函数
 def Kernel(lista,listb,k):
     listc=lista-listb
-    return exp(listc*listc.T/(-2)*k**2)
+    return exp(sqrt(listc*listc.T)/((-2)*(k**2)))
 
 #加权线性回归
 def LWLR(testinglist,traininglist,traininglab,k):
@@ -66,7 +68,7 @@ def CrossValidation(data,m,l):
     traininglist,traininglab,testinglist,testinglab=Selector(data,m)
     error=[]
     for j in range(1,l+1):
-        k=exp(j-8)
+        k=j*0.1
         error1=0
         a1=shape(testinglist)[0]
         for i in range(a1):
@@ -79,21 +81,26 @@ def CrossValidation(data,m,l):
 if __name__=='__main__':
     filename=r'F:\git2\Algorithm-and-Data\LR\abalone.txt'
     data=Parser(filename)
-    l=8
+    l=3
     error=CrossValidation(data[0:1000],0.85,l)
-    error1=(error-mean(error,0))/var(error,0)          #把error进行标准化，作图更容易查看
+#    error1=(error-mean(error,0))/var(error,0)          #把error进行标准化，作图更容易查看
     karr=range(1,l+1)       
     fig=plt.figure()
     ax=fig.add_subplot(111)
-    ax.plot(karr,error1)
+    ax.plot(karr,error)
     plt.show()
     
 #随便取几个数据回归的试一下
-    i=4
-    k=exp(argsort(error)[0]-8)
-    traininglist,traininglab,testinglist,testinglab=Selector(data[201:401],0.8)
-    coe=LWLR(testinglist[i],traininglist,traininglab,k)
-    print(float(testinglist[i]*coe))
-    print(testinglab[0,i])
+#    i=4
+#    k1=argsort(error)[0]*10
+#    traininglist,traininglab,testinglist,testinglab=Selector(data[200:400],0.8)
+#    coe=LWLR(testinglist[i],traininglist,traininglab,k1)
+#    print(float(testinglist[i]*coe))
+#    print(testinglab[0,i])
+
+
+
+
+
 
 
